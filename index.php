@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = $con->prepare("SELECT username, pass FROM CREDENTIALS
     WHERE username = ? AND pass = ?");
+    $sql->bind_param("ss", $username, $password);
 
     $sql->execute();
     $result = $sql->get_result();
