@@ -2,9 +2,9 @@
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $servername = "localhost";
-    $user = "root";
-    $pw = "";
-    $db = "myDb";
+    $user = "root"; //Change this to your database username
+    $pw = ""; //Change this to your database password
+    $db = "database_name"; //Change this to your database name
 
     #Connect to Server
     $con = new Mysqli($servername, $user, $pw, $db) or die(Mysqli_errno());
@@ -15,18 +15,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = $con->prepare("SELECT * FROM CREDENTIALS
     WHERE username = '$username' AND pass = '$password'");
 
-    #$sql = $con->prepare("SELECT username, pass FROM CREDENTIALS
-    #WHERE username = ? AND pass = ?");
-    #$sql->bind_param("ss", $username, $password);
+    //safe version of the sql query
+    //$sql = $con->prepare("SELECT username, pass FROM CREDENTIALS
+    //WHERE username = ? AND pass = ?");
+    //$sql->bind_param("ss", $username, $password);
 
     $sql->execute();
     $result = $sql->get_result();
 
     if ($result->num_rows > 0) {
-        // User exists, redirect to another page
         echo "SUCCESS!";
     } else {
-        // Invalid credentials
         echo "Invalid username or password.";
     }
     $sql->close();
