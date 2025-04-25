@@ -12,13 +12,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = $con->prepare("SELECT * FROM CREDENTIALS
-    WHERE username = '$username' AND pass = '$password'");
+    #$sql = $con->prepare("SELECT * FROM CREDENTIALS
+    #WHERE username = '$username' AND pass = '$password'");
     
     //safe version of the sql query
-    //$sql = $con->prepare("SELECT username, pass FROM CREDENTIALS
-    //WHERE username = ? AND pass = ?");
-    //$sql->bind_param("ss", $username, $password);
+    $sql = $con->prepare("SELECT username, pass FROM CREDENTIALS
+    WHERE username = ? AND pass = ?");
+    $sql->bind_param("ss", $username, $password);
 
     $sql->execute();
     $result = $sql->get_result();

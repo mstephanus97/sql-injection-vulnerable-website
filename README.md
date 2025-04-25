@@ -1,20 +1,12 @@
 # sql-injection-vulnerable-website
  this website uses mysql as the backend and is vunlerable to sql injection attack
 
-How to deploy application
-Installations used in this tutorial:
-XAMPP (https://www.apachefriends.org/download.html)
+This branch consist the fixed version of the website. This version replaces the string interpolation with sql prepared statement. This avoids user input being directly placed inside of the sql query. Instead, the prepared statement inserts the user input into the sql statement as a string argument. Therefore, when the userinputs an sql code as the username or password, the entire text will be treated as a string and then inserted into the query.
 
+Example:
 
-1. Clone this git repository to your local computer.
+Before, this command would return success: 
+' OR 1=1; #
+because 1=1 will always result to true and the rest of the check will be commented out.
 
-2. Find the index.php file located in this repository, and then copy it to your apache webserver directory. You can find the webserver file directory by accessing the httpd.conf file. Here's how to find the .conf file:
-    - Find the folder where XAMPP is installed. Then head to the etc folder and open the httpd.conf file. Find the DocumentRoot line, this is the location of where we need to put our index.php
-
-<img src="/img/documentroot.png">
-
-3. Open XAMPP and head to the managed server. Then start up MySql database and Apache Web Server.
-
-<img src="/img/XAMPP.png">
-
-4. Once they are running, type in localhost in your browser and the website should load up. The website has a username and password form and a submit button. The website will then echo "SUCCESS!" if the user successfully login and "Invalid username or password." if the username and password is incorrect.
+Now with prepare statement, the query will simply search for "' OR 1=1; #" in the database, and return invalid username or password.
