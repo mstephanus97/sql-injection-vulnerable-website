@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = $con->prepare("SELECT * FROM CREDENTIALS
     WHERE username = '$username' AND pass = '$password'");
-
+    
     //safe version of the sql query
     //$sql = $con->prepare("SELECT username, pass FROM CREDENTIALS
     //WHERE username = ? AND pass = ?");
