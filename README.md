@@ -18,3 +18,5 @@ XAMPP (https://www.apachefriends.org/download.html)
 <img src="/img/XAMPP.png">
 
 4. Once they are running, type in localhost in your browser and the website should load up. The website has a username and password form and a submit button. The website will then echo "SUCCESS!" if the user successfully login and "Invalid username or password." if the username and password is incorrect.
+
+5. You can perform an sql injection in the username or password text box. For exammple, entering "' OR 1=1; #" in the username or password will return "SUCCESS".
